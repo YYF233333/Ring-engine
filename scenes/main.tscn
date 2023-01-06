@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgk8dwrmumwji"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_ovk5y"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_emyad"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ovk5y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_emyad")

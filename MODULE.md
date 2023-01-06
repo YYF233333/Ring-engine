@@ -1,0 +1,14 @@
+- character
+  - image group
+- background
+  - multi-layer
+- animation
+  - transform
+  - camera
+  - 特效
+- audio
+  - BGM
+  - auto voice
+- text box
+  - multi text box
+- backlog, save & load

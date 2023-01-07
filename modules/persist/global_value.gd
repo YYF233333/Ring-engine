@@ -1,0 +1,90 @@
+extends Node
+
+## 单例，全局变量存储器，保存在场景切换后或者游戏重新加载时需要保持不变的数据[br]
+## 典型用途：[br]
+##  1.脚本变量影射全局变量：
+##  [codeblock]
+##  var a: int:
+##      set(val): GlobalValue.set_var("a", val)
+##      get: GlobalValue.get_var("a")
+##  [/codeblock]
+
+## 全局变量类型
+enum VarType {
+    SNAPSHOT, ## 跟随存档一起保存，加载存档时覆盖
+    TEMP, ## 保存在内存中，切换场景时保持，关闭游戏丢失
+    PERSIST ## 关闭游戏时将保存到磁盘
+}
+
+var global_var: Dictionary = {}
+
+class GlobalVar:
+    var type: VarType
+    var value: Variant
+    
+    func _init(type: VarType, value: Variant) -> void:
+        self.type = type
+        self.value = value
+
+## 初始化或者修改全局变量值，默认创建TEMP类型的变量
+func set_var(name: String, value: Variant) -> void:
+    global_var[name] = GlobalVar.new(VarType.TEMP, value)
+
+## [method set_var]PERSIST变体
+func set_var_persist(name: String, value: Variant) -> void:
+    global_var[name] = GlobalVar.new(VarType.PERSIST, value)
+
+## [method set_var]SNAPSHOT变体
+func set_var_snapshot(name: String, value: Variant) -> void:
+    global_var[name] = GlobalVar.new(VarType.SNAPSHOT, value)
+
+## 变量不存在时返回null
+func get_var(name: String) -> Variant:
+    return null if global_var.get(name) == null else global_var.get(name).value
+
+func has_var(name: String) -> bool:
+    return global_var.has(name)
+
+## 获取全局变量类型（不是变量自己的类型），变量不存在时返回null
+func var_type(name: String) -> VarType:
+    return null if not global_var.has(name) else global_var[name].type
+
+## 获取所有需要被快照保存的变量
+func snapshot_vars() -> Dictionary:
+    var snap_vars = {}
+    for key in global_var:
+        if global_var[key].type == VarType.SNAPSHOT:
+            var value = global_var[key].value
+            if typeof(value) == TYPE_ARRAY or typeof(value) == TYPE_DICTIONARY:
+                snap_vars[key] = value.duplicate(true)
+            else:
+                snap_vars[key] = value
+    return snap_vars
+
+func _enter_tree() -> void:
+    #TODO find a proper place for this
+    if not DirAccess.dir_exists_absolute("res://save"):
+        DirAccess.make_dir_absolute("res://save")
+    var json = JSON.new()
+    var data = FileAccess.get_file_as_string("res://save/global_variables.json")
+    # Check if there is any error while parsing the JSON string, skip in case of failure
+    if data:
+        var parse_result = json.parse(data)
+        if not parse_result == OK:
+            print("JSON Parse Error: ", json.get_error_message(), " in ", data, " at line ", json.get_error_line())
+            return
+        var global_persist = json.get_data()
+        for key in global_persist:
+            global_var[key] = GlobalVar.new(VarType.PERSIST, global_persist[key])
+
+func _exit_tree() -> void:
+    var global_persist = {}
+    for key in global_var:
+        if global_var[key].type == VarType.PERSIST:
+            global_persist[key] = global_var[key].value
+    var data = JSON.stringify(global_persist, "    ")
+    var global_file = FileAccess.open("res://save/global_variables.json", FileAccess.WRITE)
+    if global_file == null:
+        print("File open error: ", FileAccess.get_open_error())
+        return
+    global_file.store_string(data)

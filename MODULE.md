@@ -11,4 +11,5 @@
   - auto voice
 - text box
   - multi text box
-- backlog, save & load
+- [x] backlog, save & load
+  - [ ] group of not save nodes

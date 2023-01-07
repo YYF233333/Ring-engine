@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Save="*res://scripts/persist/save.gd"
-GlobalValue="*res://scripts/persist/global_value.gd"
+SnapshotServer="*res://modules/persist/snapshot.gd"
+GlobalValue="*res://modules/persist/global_value.gd"
 
 [display]
 

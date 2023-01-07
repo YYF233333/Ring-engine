@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgk8dwrmumwji"]
+[gd_scene load_steps=4 format=3 uid="uid://dgk8dwrmumwji"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ovk5y"]
+[ext_resource type="Texture2D" uid="uid://ctnqjc8xnmw7j" path="res://icon.svg" id="2_2aywu"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_emyad"]
 particle_flag_disable_z = true
@@ -15,3 +16,7 @@ script = ExtResource("1_ovk5y")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 process_material = SubResource("ParticleProcessMaterial_emyad")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(445, 604)
+texture = ExtResource("2_2aywu")

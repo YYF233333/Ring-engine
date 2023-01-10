@@ -8,6 +8,40 @@
 
 config_version=5
 
+_global_script_classes=[{
+"base": "RefCounted",
+"class": &"Assert",
+"language": &"GDScript",
+"path": "res://modules/utils/assert.gd"
+}, {
+"base": "Sprite2D",
+"class": &"Layer",
+"language": &"GDScript",
+"path": "res://modules/background/layer.gd"
+}, {
+"base": "ProductType",
+"class": &"Option",
+"language": &"GDScript",
+"path": "res://modules/utils/option.gd"
+}, {
+"base": "RefCounted",
+"class": &"ProductType",
+"language": &"GDScript",
+"path": "res://modules/utils/product_type.gd"
+}, {
+"base": "ProductType",
+"class": &"Result",
+"language": &"GDScript",
+"path": "res://modules/utils/result.gd"
+}]
+_global_script_class_icons={
+"Assert": "",
+"Layer": "",
+"Option": "",
+"ProductType": "",
+"Result": ""
+}
+
 [application]
 
 config/name="Ring Engine"
@@ -18,7 +52,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 SnapshotServer="*res://modules/persist/snapshot.gd"
-GlobalValue="*res://modules/persist/global_value.gd"
+GlobalVar="*res://modules/persist/global_var.gd"
+TextboxServer="*res://modules/textbox/textbox_server.gd"
+AssetLoader="*res://modules/loading/asset_loader.gd"
+Config="*res://modules/config/config.gd"
 
 [display]
 
@@ -29,3 +66,19 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Ring Engine"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/godotsize/plugin.cfg", "res://addons/script-name-on-top/plugin.cfg")
+
+[input]
+
+gdshell_toggle_ui={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":96,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[rendering]
+
+renderer/rendering_method="mobile"

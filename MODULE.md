@@ -9,7 +9,8 @@
 - audio
   - BGM
   - auto voice
-- text box
+- [ ]text box
   - multi text box
 - [x] backlog, save & load
   - [ ] group of not save nodes
+- loading assets

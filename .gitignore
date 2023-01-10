@@ -3,6 +3,9 @@
 */*.import
 *.import
 
+# addons
+addons/
+
 # userdata
 save/
 savedata/

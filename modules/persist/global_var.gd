@@ -18,7 +18,7 @@ enum VarType {
 
 var global_var: Dictionary = {}
 
-class GlobalVar:
+class GlobalVariable:
     var type: VarType
     var value: Variant
     
@@ -28,15 +28,15 @@ class GlobalVar:
 
 ## 初始化或者修改全局变量值，默认创建TEMP类型的变量
 func set_var(name: String, value: Variant) -> void:
-    global_var[name] = GlobalVar.new(VarType.TEMP, value)
+    global_var[name] = GlobalVariable.new(VarType.TEMP, value)
 
 ## [method set_var]PERSIST变体
 func set_var_persist(name: String, value: Variant) -> void:
-    global_var[name] = GlobalVar.new(VarType.PERSIST, value)
+    global_var[name] = GlobalVariable.new(VarType.PERSIST, value)
 
 ## [method set_var]SNAPSHOT变体
 func set_var_snapshot(name: String, value: Variant) -> void:
-    global_var[name] = GlobalVar.new(VarType.SNAPSHOT, value)
+    global_var[name] = GlobalVariable.new(VarType.SNAPSHOT, value)
 
 ## 变量不存在时返回null
 func get_var(name: String) -> Variant:
@@ -62,20 +62,14 @@ func snapshot_vars() -> Dictionary:
     return snap_vars
 
 func _enter_tree() -> void:
-    #TODO find a proper place for this
-    if not DirAccess.dir_exists_absolute("res://save"):
-        DirAccess.make_dir_absolute("res://save")
-    var json = JSON.new()
-    var data = FileAccess.get_file_as_string("res://save/global_variables.json")
-    # Check if there is any error while parsing the JSON string, skip in case of failure
-    if data:
-        var parse_result = json.parse(data)
-        if not parse_result == OK:
-            print("JSON Parse Error: ", json.get_error_message(), " in ", data, " at line ", json.get_error_line())
-            return
-        var global_persist = json.get_data()
-        for key in global_persist:
-            global_var[key] = GlobalVar.new(VarType.PERSIST, global_persist[key])
+    var data = AssetLoader.load_json_from_file("res://save/global_variables.json")
+    if data.is_err():
+        global_var = {}
+        return
+    var global_persist = data.unwrap()
+    for key in global_persist:
+        global_var[key] = GlobalVariable.new(VarType.PERSIST, global_persist[key])
+        
 
 func _exit_tree() -> void:
     var global_persist = {}

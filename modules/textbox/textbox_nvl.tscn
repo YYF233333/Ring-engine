@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1578p8a74gbc"]
+
+[ext_resource type="Script" path="res://modules/textbox/textbox.gd" id="1_g8udw"]
+
+[sub_resource type="SystemFont" id="SystemFont_s1f3f"]
+
+[sub_resource type="Theme" id="Theme_nr75f"]
+default_font = SubResource("SystemFont_s1f3f")
+default_font_size = 50
+
+[node name="textbox_nvl" type="Control" node_paths=PackedStringArray("textbox")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_nr75f")
+script = ExtResource("1_g8udw")
+textbox = NodePath("PanelContainer/MarginContainer/textbox")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(1344, 0)
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="textbox" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1

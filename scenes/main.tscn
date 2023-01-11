@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgk8dwrmumwji"]
+[gd_scene load_steps=5 format=3 uid="uid://cuiiym0nj20jx"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ovk5y"]
 [ext_resource type="Texture2D" uid="uid://ctnqjc8xnmw7j" path="res://icon.svg" id="2_2aywu"]
 [ext_resource type="Script" path="res://scenes/Icon2.gd" id="3_q0lyu"]
-[ext_resource type="Script" path="res://modules/background/background.gd" id="4_4ilv8"]
+[ext_resource type="Script" path="res://modules/background/layers.gd" id="4_bfwoq"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_ovk5y")
@@ -17,5 +17,5 @@ position = Vector2(695, 611)
 texture = ExtResource("2_2aywu")
 script = ExtResource("3_q0lyu")
 
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("4_4ilv8")
+[node name="background" type="Node2D" parent="."]
+script = ExtResource("4_bfwoq")

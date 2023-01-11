@@ -12,7 +12,7 @@ var snapshots: Array[Snapshot] = []
 ## 全局唯一存档计数器，提供默认存档文件名称
 var save_counter: int:
     set(val): GlobalVar.set_var_persist("save_counter", val)
-    get: return GlobalVar.get_var("save_counter")
+    get: return GlobalVar.get_var("save_counter").unwrap()
 
 
 class Snapshot:

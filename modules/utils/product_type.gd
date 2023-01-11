@@ -18,6 +18,13 @@ func unwrap():
     Assert.unimplemented(
         "Calling unwrap method of base type, should be overidden by subclass.")
 
+## Return the contained Ok/Some value without checking that the value is not Err/None.[br]
+## Push a warning if you do unwrap an Err/None value.
+func unwrap_unchecked():
+    if self.flag == Flag.SECOND:
+        push_warning("Unwrapping an Err/None value without check: ", self.val)
+    return self.val
+
 ## Return the contained Ok/Some value or a provided default.
 func unwrap_or(default):
     return self.val if self.flag == Flag.FIRST else default

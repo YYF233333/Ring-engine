@@ -26,7 +26,7 @@ func get_layer(z: int) -> Layer:
     return get_child(z) as Layer
 
 ## Apply a method to all layers, your return values will be collect and passed back as an Array[br]
-## lambda signature: fn(Layer) -> Any
+## lambda signature: Fn(Layer) -> Any
 func apply(f: Callable) -> Array:
     assert(get_child_count() == MAX_LAYER_COUNT)
     var ret = get_children().map(f)

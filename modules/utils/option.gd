@@ -13,6 +13,7 @@ func is_some() -> bool:
 func is_none() -> bool:
     return self.flag == Flag.SECOND
 
+## Return the contained Some value or panic on None.
 func unwrap():
     if self.flag == Flag.SECOND:
         Assert.panic("Trying to unwrap a None value")

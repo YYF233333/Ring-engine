@@ -1,5 +1,6 @@
 extends Node
 
+## Store mapping from asset name to asset path
 @export var assets: Dictionary
 
 func _ready() -> void:

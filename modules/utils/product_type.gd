@@ -30,7 +30,7 @@ func unwrap_or(default):
     return self.val if self.flag == Flag.FIRST else default
 
 ## Return the contained Ok/Some value or computes it from a closure.[br]
-## lambda signatrue: Fn(err: Variant) -> Variant
+## lambda signatrue: [code]Fn(err: Variant) -> Variant[/code]
 func unwrap_or_else(f: Callable):
     return self.val if self.flag == Flag.FIRST else f.call(self.val)
 

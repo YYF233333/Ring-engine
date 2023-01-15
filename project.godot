@@ -14,15 +14,20 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://modules/utils/assert.gd"
 }, {
+"base": "Layers",
+"class": &"ImageGroup",
+"language": &"GDScript",
+"path": "res://modules/character/image_group.gd"
+}, {
 "base": "Sprite2D",
 "class": &"Layer",
 "language": &"GDScript",
-"path": "res://modules/background/layer.gd"
+"path": "res://modules/canvas_layer/layer.gd"
 }, {
 "base": "Node2D",
 "class": &"Layers",
 "language": &"GDScript",
-"path": "res://modules/background/layers.gd"
+"path": "res://modules/canvas_layer/layers.gd"
 }, {
 "base": "ProductType",
 "class": &"Option",
@@ -38,14 +43,21 @@ _global_script_classes=[{
 "class": &"Result",
 "language": &"GDScript",
 "path": "res://modules/utils/result.gd"
+}, {
+"base": "RefCounted",
+"class": &"Transform",
+"language": &"GDScript",
+"path": "res://modules/animation/transform/transform.gd"
 }]
 _global_script_class_icons={
 "Assert": "",
+"ImageGroup": "",
 "Layer": "",
 "Layers": "",
 "Option": "",
 "ProductType": "",
-"Result": ""
+"Result": "",
+"Transform": ""
 }
 
 [application]
@@ -72,6 +84,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Ring Engine"
+
+[editor]
+
+export/convert_text_resources_to_binary=true
 
 [editor_plugins]
 

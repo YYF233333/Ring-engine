@@ -1,16 +1,18 @@
 - character
   - image group
-- background
-  - multi-layer
+- [x] background
+  - [x] multi-layer
 - animation
+  - built in
+  - shader
   - transform
   - camera
   - 特效
 - audio
   - BGM
   - auto voice
-- [ ]text box
+- [ ] text box
   - multi text box
 - [x] backlog, save & load
   - [ ] group of not save nodes
-- loading assets
+- [x] loading assets

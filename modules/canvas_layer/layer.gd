@@ -16,7 +16,7 @@ func display_img(texture: Texture) -> void:
     self.texture = texture
 
 ## Apply a function to this Layer, your return value will be passed back.[br]
-## lambda signature: Fn(Layer) -> Any[br]
+## lambda signature: [code]Fn(Layer) -> Any[/code][br]
 ## Do anything [b][color=red]EXCEPT[/color][/b] free the Layer Node
 func apply(f: Callable):
     return f.call(self)

@@ -27,7 +27,8 @@ func unwrap_err():
         return null
     return self.val
 
-## Converts the Err value by applying a function to it, leaving an Ok value untouched.
+## Converts the Err value by applying a function to it, leaving an Ok value untouched.[br]
+## lambda signature: [code]Fn(Error) -> Error[/code]
 func map_err(op: Callable) -> Result:
     if self.flag == Flag.SECOND:
         self.val = op.call(self.val)

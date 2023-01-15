@@ -72,14 +72,13 @@ func animate(animation: Callable) -> Result:
             return res
     return Result.Ok()
 
-## Apply a method to all layers, your return values will be collect and passed back as an Array[br]
-## lambda signature: [code]Fn(Layer) -> Any[/code]
-func apply(f: Callable) -> Array:
-    assert(get_child_count() == layer_count)
-    var ret = get_children().map(f)
-    assert(get_child_count() == layer_count)
-    return ret
-
 ## Reinitialize all layers
 func clear() -> void:
-    apply(func(x: Layer): x.clear())
+    for child in get_children():
+        child.clear()
+
+## Debug check
+func _process(_delta) -> void:
+    if not OS.has_feature("standalone"):
+        assert(get_child_count() == layer_count)
+

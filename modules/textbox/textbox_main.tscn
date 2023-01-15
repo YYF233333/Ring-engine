@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://modules/textbox/textbox.gd" id="1_5fs7n"]
 
-[sub_resource type="SystemFont" id="SystemFont_iu6ac"]
+[sub_resource type="SystemFont" id="SystemFont_v0kpw"]
 subpixel_positioning = 0
 
-[sub_resource type="Theme" id="Theme_5470r"]
-default_font = SubResource("SystemFont_iu6ac")
+[sub_resource type="Theme" id="Theme_10xw5"]
+default_font = SubResource("SystemFont_v0kpw")
 default_font_size = 50
 
 [node name="textbox_main" type="Control" node_paths=PackedStringArray("textbox", "namebox")]
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_5470r")
+theme = SubResource("Theme_10xw5")
 script = ExtResource("1_5fs7n")
 textbox = NodePath("PanelContainer/MarginContainer/textbox")
 namebox = NodePath("PanelContainer2/namebox")

@@ -60,17 +60,14 @@ func get_layer(z: int) -> Layer:
     # fetch layer by name
     return get_node(String.num_int64(z)) as Layer
 
-## Apply animation to all layers, abort and return on first Error.
-## Animation signature: [code]Fn(Tween, Layer) -> Result[/code]
-func animate(animation: Callable) -> Result:
+## Apply animation to all layers.
+## Animation signature: [code]Fn(Tween, Layer) -> void[/code]
+func animate(animation: Transform) -> void:
     if tween != null:
         tween.kill()
     tween = create_tween().set_parallel()
     for layer in get_layers():
-        var res = animation.call(tween, layer)
-        if res.is_err():
-            return res
-    return Result.Ok()
+        animation.action(tween, layer)
 
 ## Reinitialize all layers
 func clear() -> void:

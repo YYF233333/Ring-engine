@@ -1,0 +1,1 @@
+- [x] 重构animation，使用工厂模式而不是lambda

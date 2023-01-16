@@ -1,31 +1,38 @@
 class_name Transform
 
-## Type 1 animation, used to animate single standing.
+## Type 1 animation, used to animate single ImageGroup.
 ##
-##  These are high order functions which return real animation functions.
-##  Signature of their [b]RETURN VALUE[/b]: [code]Fn(Tween, Layer) -> void[/code]
+##  This is the base class. To create a Transform:[br]
+##  1. Create a new class extend this base class.[br]
+##  2. Override [method action] to implement specific logic.[br]
+##  3. Create convenient presets.
 
-# Presets
+## Transform last time in seconds.
+var duration: float
+## Final value of the property
+var final_val
+## see [member Tween.EaseType]
+var ease_type: Tween.EaseType
+## see [member Tween.TransitionType]
+var trans_type: Tween.TransitionType
+## other arguments to apply
+var other_args
 
-func fade_in(duration: float) -> Callable:
-    return fade(duration, 1.0, Tween.EASE_IN, Tween.TRANS_LINEAR)
-
-
-func fade_out(duration: float) -> Callable:
-    return fade(duration, 0.0, Tween.EASE_IN, Tween.TRANS_LINEAR)
-
-    
-# Base function
-
-func fade(
+func _init(
     duration: float,
-    final_alpha: float,
+    final_val,
     ease_type: Tween.EaseType,
-    transition_type: Tween.TransitionType
-) -> Callable:
-    # TODO: strict layer type to Layer
-    return func(tween: Tween, layer: Sprite2D):
-        tween.tween_property(
-            layer, "modulate:a", final_alpha, duration
-        ).set_ease(ease_type).set_trans(transition_type)
+    transition_type: Tween.TransitionType,
+    other_args = null
+) -> void:
+    self.duration = duration
+    self.final_val = final_val
+    self.ease_type = ease_type
+    self.trans_type = transition_type
+    self.other_args = other_args
 
+
+## Transform function, apply animation to layer provided.
+## Should be overriden in sub class to implement specific logic.
+func action(_tween: Tween, _layer: Layer) -> void:
+    Assert.unimplemented("Calling transform action from base class")

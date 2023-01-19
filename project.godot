@@ -20,8 +20,8 @@ config/icon="res://icon.svg"
 SnapshotServer="*res://modules/persist/snapshot.gd"
 GlobalVar="*res://modules/persist/global_var.gd"
 TextboxServer="*res://modules/textbox/textbox_server.gd"
-AssetLoader="*res://modules/loading/asset_loader.gd"
 Config="*res://modules/config/config.gd"
+AssetLoader="*res://modules/loading/assets.gd"
 
 [display]
 

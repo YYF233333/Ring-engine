@@ -5,7 +5,8 @@ extends Sprite2D
 
 ## Display an image in the assets
 func display(name: String) -> Result:
-    var res = AssetLoader.load_img(name)
+    #var res = AssetLoader.load_img(name)
+    var res = Result.Err("unimplemented")
     if res.is_err():
         return res
     self.texture = res.unwrap()

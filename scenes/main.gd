@@ -1,10 +1,15 @@
 extends Node2D
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     $background.add_layer()
     $background.get_layer(0).display_img(load("res://icon.svg"))
     $background.get_layer(0).position = Vector2(300.0, 300.0)
+    SnapshotServer.create_snapshot(self)
+    var name = SnapshotServer.persist_snapshot(SnapshotServer.current_snapshots()[0]).expect("")
+    SnapshotServer.load_snapshot(name, self)
     pass
 
 
@@ -15,4 +20,4 @@ func _process(_delta: float) -> void:
     elif Input.is_action_just_pressed("ui_cancel"):
         $background.animate(Move.to_pos(1.0, Vector2(0.2, 0.5)))
     #$background.clear()
-    pass
+    

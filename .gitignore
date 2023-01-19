@@ -9,3 +9,7 @@ addons/
 # userdata
 save/
 savedata/
+
+# test data
+assets/
+config/

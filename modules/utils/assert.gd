@@ -1,20 +1,29 @@
 class_name Assert
 
-static func unimplemented(msg: String = "", arg1 = "", arg2 = "", arg3 = "") -> void:
+## Mimic corresponding macros in Rust.
+##
+## Leave the return types unspecified, so we can coerce return value to any type.
+## Enable usage like:
+##  [codeblock]
+##  func f() -> Result:
+##      return Assert.unimplemented()
+##  [/codeblock]
+
+static func unimplemented(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "not implemented"
     if msg != "":
         message += chain([": ", msg, arg1, arg2, arg3])
     push_error(message)
     assert(false)
 
-static func unreachable(msg: String = "", arg1 = "", arg2 = "", arg3 = "") -> void:
+static func unreachable(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "entered unreachable code"
     if msg != "":
         message += chain([": ", msg, arg1, arg2, arg3])
     push_error(message)
     assert(false)
 
-static func panic(msg: String = "", arg1 = "", arg2 = "", arg3 = "") -> void:
+static func panic(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "program panicked at "
     if msg != "":
         message += chain([": ", msg, arg1, arg2, arg3])

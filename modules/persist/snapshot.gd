@@ -86,33 +86,27 @@ func rollback(name: String, prev_root: Node) -> Result:
 ## [color=yellow]Warning:[/color] 已经存在的同名快照将被覆盖
 func persist_snapshot(name: String, file_name: String = "") -> Result:
     var snapshot: Snapshot = snapshot_name[name]
-    # save scenetree
-    recursive_set_owner(snapshot.root)
-    var scene = PackedScene.new()
-    var result = scene.pack(snapshot.root)
-    if result != OK:
-        return Result.Err("pack scene failed: %s" % result)
     if file_name.is_empty():
         file_name = snapshot.name
-    var error = ResourceSaver.save(scene, "res://save/"+file_name+".tscn")
-    if error != OK:
-        return Result.Err("save scene failed: %s" % error)
+    # save scenetree
+    recursive_set_owner(snapshot.root)
+    var res = Asset.new_scene("res://save/"+file_name+".tscn").try_store(snapshot.root)
+    if res.is_err(): return res
     # save snapshot vars
-    var meta = JSON.stringify(snapshot.meta, "    ")
-    var meta_file = FileAccess.open("res://save/"+file_name+".json", FileAccess.WRITE)
-    if meta_file == null:
-        return Result.Err("File open error: %s" % FileAccess.get_open_error())
-    meta_file.store_string(meta)
+    res = Asset.new_json("res://save/"+file_name+".json").try_store(snapshot.meta)
+    if res.is_err(): return res
     return Result.Ok(file_name)
 
 ## 从磁盘中加载快照，加载成功后会自动替换当前场景
 func load_snapshot(file_name: String, prev_root: Node) -> Result:
-    var scene = load("res://save/"+file_name+".tscn")
-    if scene == null:
-        return Result.Err("An error occurred while loading scene "+ file_name)
-    var meta = AssetLoader.load_json_from_file("res://save/"+file_name+".json")
-    if meta.is_err():
-        return Result.Err("loading metadata of "+file_name+" failed: "+meta.unwrap_err())
+    var res = Asset.new_scene("res://save/"+file_name+".tscn").try_load()
+    if res.is_err():
+        return res
+    var scene = res.unwrap() as PackedScene
+    res = Asset.new_json("res://save/"+file_name+".json").try_load()
+    if res.is_err():
+        return res
+    var meta = res.unwrap()
     var parent = prev_root.get_parent()
     assert(parent != null)
     parent.remove_child(prev_root)

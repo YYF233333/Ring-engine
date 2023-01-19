@@ -69,11 +69,8 @@ func snapshot_vars() -> Dictionary:
     return snap_vars
 
 func _enter_tree() -> void:
-    var data = AssetLoader.load_json_from_file("res://save/global_variables.json")
-    if data.is_err():
-        global_var = {}
-        return
-    var global_persist = data.unwrap()
+    var global_persist = Asset.new_json("res://save/global_variables.json"
+        ).try_load().unwrap_or({})
     for key in global_persist:
         global_var[key] = GlobalVariable.new(VarType.PERSIST, global_persist[key])
         
@@ -83,9 +80,6 @@ func _exit_tree() -> void:
     for key in global_var:
         if global_var[key].type == VarType.PERSIST:
             global_persist[key] = global_var[key].value
-    var data = JSON.stringify(global_persist, "    ")
-    var global_file = FileAccess.open("res://save/global_variables.json", FileAccess.WRITE)
-    if global_file == null:
-        print("File open error: ", FileAccess.get_open_error())
-        return
-    global_file.store_string(data)
+    var err = Asset.new_json("res://save/global_variables.json").try_store(global_persist)
+    if err.is_err():
+        print(err.unwrap_err())

@@ -1,4 +1,4 @@
-class_name ImageGroup
+class_name Standing
 extends Layers
 
 ## Character standing node
@@ -7,16 +7,17 @@ extends Layers
 
 ## 差分元数据（各个图层的图片名称），使用差分名索引。
 ## Dictionary[name, Dictionary[z_index, Texture]]
-var standings: Dictionary
+var meta: Dictionary
 
 func _ready() -> void:
-    standings = AssetLoader.get_meta(name)
+    var chara_name = get_parent().name
+    var group: AssetGroup = AssetLoader.get_group(chara_name).expect("Character setup fail")
+    meta = group.get_member("meta").unwrap()
+    
 
 func display(diff_name: String) -> Result:
-    var config: Dictionary = standings[diff_name]
+    var config: Dictionary = meta[diff_name]
     if config == null:
         return Result.Err("Standing not found")
-    for z in config.keys():
-        get_layer(z).display_img(config[z])
-    return Result.Ok()
+    return Assert.unimplemented()
 

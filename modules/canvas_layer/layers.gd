@@ -53,13 +53,14 @@ func add_layer(num := 1) -> Result:
     layer_count += num
     return Result.Ok(layer_count)
 
-## Remove layers top down, default to remove one layer.
-## Set num to more than [member layer_count] will remove all layers.[br]
+## Remove layers top down, return total layer number after remove.
+## default to remove one layer. Set num to more than [member layer_count] 
+## will remove all layers.[br]
 ## negatives are [b]NOT[/b] accepted.
-func remove_layer(num := 1) -> Result:
+func remove_layer(num := 1) -> int:
     assert(num >= 0)
     layer_count = max(layer_count - num, 0)
-    return Result.Ok(layer_count)
+    return layer_count
 
 ## Apply animation to all layers.
 ## If you want to animate single layer, see [method Layer.animate].

@@ -21,7 +21,7 @@ SnapshotServer="*res://modules/persist/snapshot.gd"
 GlobalVar="*res://modules/persist/global_var.gd"
 TextboxServer="*res://modules/textbox/textbox_server.gd"
 Config="*res://modules/config/config.gd"
-AssetLoader="*res://modules/loading/assets.gd"
+AssetLoader="*res://modules/assets/assets.gd"
 
 [display]
 

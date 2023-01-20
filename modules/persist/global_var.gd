@@ -82,4 +82,4 @@ func _exit_tree() -> void:
             global_persist[key] = global_var[key].value
     var err = Asset.new_json("res://save/global_variables.json").try_store(global_persist)
     if err.is_err():
-        print(err.unwrap_err())
+        push_error(err.unwrap_err())

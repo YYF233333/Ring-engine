@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://rjgkbpmggh5x"]
+[gd_scene load_steps=8 format=3 uid="uid://rjgkbpmggh5x"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ovk5y"]
 [ext_resource type="Shader" path="res://scenes/main.gdshader" id="2_0n3w2"]
 [ext_resource type="Texture2D" uid="uid://ctnqjc8xnmw7j" path="res://icon.svg" id="2_2aywu"]
 [ext_resource type="Script" path="res://modules/canvas_layer/layers.gd" id="2_3d0h7"]
 [ext_resource type="Script" path="res://scenes/Icon2.gd" id="3_q0lyu"]
+[ext_resource type="PackedScene" uid="uid://dnru70kjid7b2" path="res://modules/textbox/textbox_main.tscn" id="6_cwcj3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qm3yj"]
 shader = ExtResource("2_0n3w2")
@@ -24,3 +25,7 @@ script = ExtResource("3_q0lyu")
 material = SubResource("ShaderMaterial_qm3yj")
 position = Vector2(457, 577)
 texture = ExtResource("2_2aywu")
+
+[node name="textbox_main" parent="." instance=ExtResource("6_cwcj3")]
+offset_right = 1920.0
+offset_bottom = 1080.0

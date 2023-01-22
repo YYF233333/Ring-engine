@@ -33,10 +33,6 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Ring Engine"
 
-[editor]
-
-export/convert_text_resources_to_binary=true
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/godotsize/plugin.cfg", "res://addons/script-name-on-top/plugin.cfg")

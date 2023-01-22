@@ -7,4 +7,6 @@ extends Node2D
 ## When add to the SceneTree, this node provide an interface to all functionality needed,
 ## and manually alter inner nodes should be disallowed.
 
-var standing
+@onready var standing := $standing
+
+

@@ -29,6 +29,8 @@ class_name Asset
 ##  2. Construct by [Assets] system while init, mostly static assets with predefined
 ##      name. They are managed by [Assets] and act as a simpler interface to filesystem.
 
+## Used to identify an asset's type if one accidentally covert it to [Asset],
+## it is ok to just ignore this.
 enum AssetType{JSON, SCENE, IMAGE, AUDIO, OTHER}
 
 ## Asset name, used by other parts of the engine as well as scripts.

@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnru70kjid7b2"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://modules/textbox/textbox.gd" id="1_5fs7n"]
+[ext_resource type="Script" path="res://modules/SceneTree/Textbox/textbox.gd" id="1_5fs7n"]
 
-[sub_resource type="SystemFont" id="SystemFont_xl1n5"]
+[sub_resource type="SystemFont" id="SystemFont_xoog0"]
 subpixel_positioning = 0
 
-[sub_resource type="Theme" id="Theme_fcl6u"]
-default_font = SubResource("SystemFont_xl1n5")
+[sub_resource type="Theme" id="Theme_xp1v1"]
+default_font = SubResource("SystemFont_xoog0")
 default_font_size = 50
 
 [node name="textbox_main" type="Control" node_paths=PackedStringArray("textbox", "namebox")]
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_fcl6u")
+theme = SubResource("Theme_xp1v1")
 script = ExtResource("1_5fs7n")
 textbox = NodePath("PanelContainer/MarginContainer/textbox")
 namebox = NodePath("PanelContainer2/namebox")
@@ -43,6 +43,7 @@ theme_override_constants/margin_top = 50
 layout_mode = 2
 size_flags_vertical = 1
 text = "aaaaaa"
+autowrap_mode = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 0

@@ -1,21 +1,21 @@
 extends Node2D
 
+var ptr := 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    $background.add_layer()
-    $background.get_layer(0).display_img(load("res://icon.svg"))
-    $background.get_layer(0).position = Vector2(300.0, 300.0)
-    SnapshotServer.create_snapshot(self)
-    var name = SnapshotServer.persist_snapshot(SnapshotServer.current_snapshots()[0]).expect("")
-    SnapshotServer.load_snapshot(name, self)
     pass
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-    if Input.is_action_just_pressed("ui_accept"):
-        $background.animate(Move.to_pos(1.0, Vector2(0.8, 0.5)))
-    elif Input.is_action_just_pressed("ui_cancel"):
-        $background.animate(Move.to_pos(1.0, Vector2(0.2, 0.5)))
-    #$background.clear()
+    pass
     
+static func script() -> void:
+    #var hongye = Runtime.get_char()
+    #hongye.show_standing("1")
+    #hongye.apply_transform(Show.at_middle())
+    TextboxServer.main_textbox.show_text("114")
+    #var hongye = Runtime.get_char()
+    #hongye.show_standing("1")
+    #hongye.apply_transform(Show.at_right())
+    TextboxServer.main_textbox.show_text("514")

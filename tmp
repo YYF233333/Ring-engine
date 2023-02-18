@@ -1,0 +1,105 @@
+topLevelDecl
+    = classVarDecl
+    | constDecl
+    | enumDecl
+    | methodDecl
+    | constructorDecl
+    | innerClass
+
+typeHint = BUILTINTYPE | IDENTIFIER ;
+
+
+methodDecl = [ "static" ] "func" IDENTIFIER "(" [ parList ] ")"
+    [ "->" typeHint] ":" stmtOrSuite ;
+parList = parameter { "," parameter } ;
+parameter = [ "var" ] IDENTIFIER [ ":" typeHint ] [ "=" expression ] ;
+argList = expression { "," expression } ;
+
+
+stmtOrSuite = stmt | NEWLINE INDENT suite DEDENT ;
+suite = stmt { stmt };
+
+stmt
+    = varDeclStmt
+    | ifStmt
+    | forStmt
+    | whileStmt
+    | matchStmt
+    | flowStmt
+    | assignmentStmt
+    | exprStmt
+    | assertStmt
+    | yieldStmt
+    | preloadStmt
+    | "breakpoint" stmtEnd
+    | "pass" stmtEnd
+    ;
+stmtEnd = NEWLINE | ";" ;
+
+ifStmt = "if" expression ":" stmtOrSuite { "elif" expression ":" stmtOrSuite }
+    [ "else" ":" stmtOrSuite ] ;
+whileStmt = "while" expression ":" stmtOrSuite;
+forStmt = "for" IDENTIFIER "in" expression ":" stmtOrSuite ;
+
+matchStmt = "match" expression ":" NEWLINE INDENT matchBlock DEDENT;
+matchBlock = patternList ":" stmtOrSuite { patternList ":" stmtOrSuite };
+patternList = pattern { "," pattern } ;
+pattern = literal | BUILTINTYPE | CONSTANT | "_" | bindingPattern
+    | arrayPattern | dictPattern ;
+bindingPattern = "var" IDENTIFIER ;
+arrayPattern = "[" [ pattern { "," pattern } [ ".." ] ] "]" ;
+dictPattern = "{" [ keyValuePattern ] { "," keyValuePattern } [ ".." ] "}" ;
+keyValuePattern = STRING [ ":" pattern ] ;
+
+flowStmt
+    = "continue" stmtEnd
+    | "break" stmtEnd
+    | "return" [ expression ] stmtEnd
+    ;
+
+assignmentStmt = subscription ( "=" | "+=" | "-=" | "*=" | "/="
+| "%=" | "&=" | "|=" | "^=" ) expression stmtEnd;
+varDeclStmt = "var" IDENTIFIER [ "=" expression ] stmtEnd;
+
+assertStmt = "assert" "(" expression [ "," STRING ] ")" stmtEnd ;
+yieldStmt = "yield" "(" [ expression "," expression ] ")" ;
+preloadStmt = "preload" "(" CONSTANT ")" ;
+
+(* This expression grammar encodes precedence. Items later in the list have
+higher precedence than the ones before. *)
+exprStmt = expression stmtEnd ;
+expression = cast [ "[" expression "]" ] ;
+cast = ternaryExpr [ "as" typeHint ];
+ternaryExpr = logicOr [ "if" logicOr "else" logicOr ] ;
+logicOr = logicAnd { ( "or" | "||" ) logicAnd } ;
+logicAnd = logicNot { ( "and" | "&&" ) logicNot };
+logicNot = ( "!" | "not" ) logicNot | in;
+in = comparison { "in" comparison };
+comparison = bitOr { ( "<" | ">" | "<=" | ">=" | "==" | "!=" ) bitOr } ;
+bitOr = bitXor { "|" bitXor } ;
+bitXor = bitAnd { "^" bitAnd } ;
+bitAnd = bitShift { "&" bitShift } ;
+bitShift = minus { ( "<<" | ">>" ) minus } ;
+minus = plus { "-" plus } ;
+plus = factor { "+" factor } ;
+factor = sign { ( "*" | "/" | "%" ) sign } ;
+sign = ( "-" | "+" ) sign | bitNot ;
+bitNot = "~" bitNot | is ;
+is = call [ "is" ( IDENTIFIER | BUILTINTYPE ) ] ;
+call
+    = (attribute [ "(" [ argList ] ")" ])
+    | "." IDENTIFIER "(" [ argList ] ")"
+    | "$" ( STRING | IDENTIFIER { '/' IDENTIFIER } );
+attribute = subscription { "." IDENTIFIER } ;
+subscription = primary [ "[" expression "]" ] ;
+primary = "true" | "false" | "null" | "self" | literal | arrayDecl
+    | dictDecl | "(" expression ")" ;
+
+literal = STRING | NUMBER | IDENTIFIER | BUILTINTYPE
+    | "PI" | "TAU" | "NAN" | "INF" ;
+arrayDecl = "[" [ expression { "," expression } "," ] "]" ;
+dictDecl = "{" [ keyValue { "," keyValue } "," ] "}" ;
+keyValue
+    = expression ":" expression
+    | IDENTIFIER "=" expression
+    ;

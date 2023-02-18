@@ -1,0 +1,10 @@
+<Project Sdk="Godot.NET.Sdk/4.0.0-beta">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>RingEngine</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentResults" Version="3.15.1" />
+  </ItemGroup>
+</Project>

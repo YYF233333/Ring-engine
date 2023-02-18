@@ -39,22 +39,22 @@ func set_var_snapshot(name: String, value: Variant) -> void:
     global_var[name] = GlobalVariable.new(VarType.SNAPSHOT, value)
 
 ## Return global var corresponding to the name.
-func get_var(name: String) -> Result:
+func get_var(name: String) -> Option:
     if not global_var.has(name):
-        return Result.Err(null)
+        return Option.None()
     else:
-        return Result.Ok(global_var.get(name).value)
+        return Option.Some(global_var.get(name).value)
 
 ## Test if the var exists.
 func has_var(name: String) -> bool:
     return global_var.has(name)
 
 ## 获取全局变量类型(PERSIST/TEMP/SNAPSHOT)（不是变量自己的类型）
-func var_type(name: String) -> Result:
+func var_type(name: String) -> Option:
     if not global_var.has(name):
-        return Result.Err(null)
+        return Option.None()
     else:
-        return Result.Ok(global_var[name].type)
+        return Option.Some(global_var[name].type)
 
 ## 获取所有需要被快照保存的变量
 func snapshot_vars() -> Dictionary:

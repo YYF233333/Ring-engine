@@ -12,16 +12,16 @@ config_version=5
 
 config/name="Ring Engine"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 SnapshotServer="*res://modules/persist/snapshot.gd"
 GlobalVar="*res://modules/persist/global_var.gd"
-TextboxServer="*res://modules/textbox/textbox_server.gd"
-Config="*res://modules/config/config.gd"
+TextboxServer="*res://modules/SceneTree/Textbox/textbox_server.gd"
 AssetLoader="*res://modules/assets/assets.gd"
+Runtime="*res://modules/runtime.gd"
 
 [display]
 

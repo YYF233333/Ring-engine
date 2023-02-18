@@ -80,7 +80,10 @@ func clear() -> void:
 
 ## Used to iter through all layers
 func get_layers() -> Array[Layer]:
-    return get_children().map(func(x): return x as Layer)
+    var ret:Array[Layer] = []
+    for child in get_children():
+        ret.append(child)
+    return ret
 
 ## Get layer at specific index.
 func get_layer(index: int) -> Layer:

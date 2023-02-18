@@ -36,7 +36,6 @@ func remove_from_global(name: String) -> bool:
     return global_namespace.erase(name)
 
 func _parse_entry(key: String, val: Dictionary):
-    print("parse entry ", key)
     if val["type"] == "GROUP":
         return _parse_group(key, val)
     else:

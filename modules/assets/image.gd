@@ -8,7 +8,7 @@ func _init(name: String, path: String) -> void:
 
 ## Custom load implementation
 func try_load() -> Result:
-    var image = load(path) as ImageTexture
+    var image = load(path)
     if image == null:
         return Result.Err("Asset load fail")
     return Result.Ok(image)

@@ -9,10 +9,10 @@ extends Transform
 # Constructor Presets
 
 static func preset(duration: float) -> _CLASS_:
-    return _CLASS_.new(duration, null, Tween.EASE_IN, Tween.TRANS_LINEAR)
+    return _CLASS_.new(duration, Tween.EASE_IN, Tween.TRANS_LINEAR)
 
 
-## Transform function, apply animation to layer provided.
+## Transform function, apply animation to [layer] provided.
 ## Override base method in Transform.
 func action(tween: Tween, layer: Layer) -> void:
     pass

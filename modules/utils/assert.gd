@@ -13,15 +13,13 @@ static func unimplemented(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "not implemented"
     if msg != "":
         message += chain([": ", msg, arg1, arg2, arg3])
-    push_error(message)
-    assert(false)
+    assert(false, message)
 
 static func unreachable(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "entered unreachable code"
     if msg != "":
         message += chain([": ", msg, arg1, arg2, arg3])
-    push_error(message)
-    assert(false)
+    assert(false, message)
 
 static func panic(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
     var message = "program panicked at "
@@ -29,8 +27,7 @@ static func panic(msg: String = "", arg1 = "", arg2 = "", arg3 = ""):
         message += chain([": ", msg, arg1, arg2, arg3])
     else:
         message += "explicit panic"
-    push_error(message)
-    assert(false)
+    assert(false, message)
 
 static func chain(args: Array) -> String:
     return args.reduce(func(a, b): return a+("%s" % b), "")

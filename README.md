@@ -1,3 +1,4 @@
+**This repo is abandoned, development of Ring Engine has moved to [this repo](https://github.com/YYF233333/Ring)**
 # Ring Engine
 Hobby project to implement a visual novel engine in godot.
 
